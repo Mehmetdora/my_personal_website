@@ -1,0 +1,41 @@
+<?php
+
+use App\Http\Controllers\Admin\DashboadController;
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+use Laravel\Fortify\Features;
+
+Route::get('/', function () {
+    return Inertia::render('welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('home');
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('dashboard', function () {
+        return Inertia::render('dashboard');
+    })->name('dashboard');
+});
+
+
+
+
+
+Route::middleware(['public'])->group(function () {});
+
+
+Route::controller(DashboadController::class)->group(function () {
+
+    Route::get("/anasayfa", "anasayfa")->name("anasayfa");
+    Route::get("/projeler", "projeler")->name("projeler");
+    Route::get("/yazilarim", "yazilarim")->name("yazilarim");
+    Route::get("/hakkimda", "hakkimda")->name("hakkimda");
+    Route::get("/iletisim", "iletisim")->name("iletisim");
+});
+
+
+
+
+
+
+require __DIR__ . '/settings.php';
