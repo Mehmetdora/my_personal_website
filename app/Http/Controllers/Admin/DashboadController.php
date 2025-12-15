@@ -10,8 +10,6 @@ use Inertia\Inertia;
 class DashboadController extends Controller
 {
 
-
-    // İlk girilince gösterilecek içerikler
     public function anasayfa()
     {
 
